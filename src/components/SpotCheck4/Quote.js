@@ -8,7 +8,7 @@ class Quote extends Component {
   render() {
     let q = this.props.quote
     return (
-      <div>
+      <div key={q.id}>
         <sup>{q.likes}</sup>
         <span className="add" onClick={this.likeQuote}>+</span> {/* this will invoke the *inner* likeQuote method */}
         <span>{q.text}</span>

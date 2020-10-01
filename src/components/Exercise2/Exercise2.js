@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import Conversation from './Conversation';
+import List from './List';
 
 class Exercise2 extends Component {
   constructor() {
     super()
     this.state = {
-      displayConversation: null,
+      displayConversation: "Dad",
       conversations: [
         {
           with: "Laura", convo: [
@@ -32,13 +34,24 @@ class Exercise2 extends Component {
         }
       ]
     }
-  }
 
+
+
+  }
+  
+  displayConvo = name => this.setState({displayConversation:name})
+  getConversation = () => this.state.conversations.find(c => c.with === this.state.displayConversation)
+  changestate = () =>{
+    this.setState({displayConversation:null})
+  }
   render() {
     return (
       <div >
-        {/* If displayConverastion is null - 
-    App should render List, otherwise it should display Conversation */}
+        {
+        this.state.displayConversation === null
+        ? <List displayConvo={this.displayConvo}contacts={this.state.conversations.map(c =>c.with)}/> 
+        : <Conversation convo={this.getConversation().convo} sender={this.getConversation().with } changestate={this.changestate}/>
+        }
       </div>
     );
   }
